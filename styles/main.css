@@ -1,0 +1,96 @@
+/* ==========================================================================
+   Токены
+   ========================================================================== */
+
+:root {
+  --bg: #f4f1ea;
+  --surface: #fffdf8;
+  --surface-alt: #efebe2;
+  --text: #22201c;
+  --text-soft: #6f6a60;
+  --line: #e2ddd1;
+
+  --accent: #e8590c;
+  --accent-strong: #c94a06;
+  --accent-soft: #fde5d6;
+  --success: #2b8a3e;
+  --success-soft: #e3f3e6;
+  --danger: #d6336c;
+  --danger-soft: #fbe2ea;
+  --warning: #9a6b00;
+  --warning-soft: #fff1c2;
+
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgb(34 32 28 / 4%), 0 10px 30px rgb(34 32 28 / 6%);
+  --ring: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   База
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Каркас
+   ========================================================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1080px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 40px 24px 24px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  flex: 1;
+}
+
+.layout__aside {
+  position: sticky;
+  top: 24px;
+  display: grid;
+  gap: 24px;
+}
+
+.footer {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  text-align: center;
+}
