@@ -1,0 +1,43 @@
+// Хранилище задач: состояние в памяти + синхронизация с localStorage.
+// Каждое изменение создаёт новый массив и уведомляет подписчиков.
+
+const STORAGE_KEY = "web-lab2/todos";
+const listeners = new Set();
+
+let todos = readStorage();
+
+function readStorage() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+}
+
+function writeStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
+
+function commit(next) {
+  todos = next;
+  writeStorage();
+  listeners.forEach((listener) => listener(todos));
+}
+
+const createId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+export const getTodos = () => todos;
+
+export function subscribe(listener) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+export function addTodo({ title, due }) {
+  const todo = { id: createId(), title, due, done: false, createdAt: Date.now() };
+  commit([todo, ...todos]);
+}
+
+export function toggleTodo(id) {
+  commit(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)));
+}
+
+export function removeTodo(id) {
+  commit(todos.filter((todo) => todo.id !== id));
+}
