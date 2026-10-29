@@ -241,3 +241,153 @@ p {
   color: var(--danger);
   background: var(--danger-soft);
 }
+
+/* ==========================================================================
+   Список задач
+   ========================================================================== */
+
+.board__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.board__count {
+  min-width: 28px;
+  padding: 2px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+}
+
+.board__hint {
+  margin: -6px 0 14px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.board__empty {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text-soft);
+  border: 2px dashed var(--line);
+  border-radius: var(--radius-md);
+}
+
+.tasks {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.task:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+
+/* Чекбокс */
+
+.task__check {
+  position: relative;
+  flex-shrink: 0;
+  display: grid;
+  cursor: pointer;
+}
+
+.task__toggle {
+  position: absolute;
+  opacity: 0;
+}
+
+.task__checkmark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.task__check:hover .task__checkmark {
+  border-color: var(--success);
+}
+
+.task__toggle:focus-visible + .task__checkmark {
+  box-shadow: var(--ring);
+}
+
+.task__toggle:checked + .task__checkmark {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.task__toggle:checked + .task__checkmark::after {
+  content: "✓";
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* Содержимое */
+
+.task__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.task__title {
+  font-size: 1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  transition: color 0.2s;
+}
+
+.task__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.task__actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+/* Состояния задачи */
+
+.task--done {
+  background: var(--success-soft);
+  border-color: transparent;
+}
+
+.task--done .task__title {
+  color: var(--text-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.task--done .task__due {
+  opacity: 0.7;
+}
