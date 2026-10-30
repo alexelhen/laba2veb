@@ -23,13 +23,14 @@ export function createTaskForm({ onCreate }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!title.value) {
+    const value = title.value.trim();
+    if (!value) {
       error.toggle(true);
       title.focus();
       return;
     }
 
-    onCreate({ title: title.value, due: due.value });
+    onCreate({ title: value, due: due.value });
     form.reset();
     title.focus();
   }
