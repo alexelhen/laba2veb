@@ -428,7 +428,33 @@ p {
   gap: 2px;
 }
 
+.badge {
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.badge--overdue {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.badge--today {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.badge--soon {
+  color: var(--warning);
+  background: var(--warning-soft);
+}
+
 /* Состояния задачи */
+
+.task--overdue {
+  box-shadow: inset 4px 0 0 var(--danger);
+}
 
 .task--done {
   background: var(--success-soft);

@@ -1,8 +1,10 @@
 import { h } from "../core/h.js";
-import { formatDue } from "../core/date.js";
+import { formatDue, dueLabel } from "../core/date.js";
 import { iconButton } from "./ui.js";
 
 export function createTaskItem(todo) {
+  const label = dueLabel(todo);
+
   const item = h("li", { class: "task", data: { id: todo.id } },
     h("label", { class: "task__check" },
       h("input", {
@@ -18,6 +20,7 @@ export function createTaskItem(todo) {
       h("h3", { class: "task__title", text: todo.title }),
       h("p", { class: "task__meta" },
         h("time", { class: "task__due", dateTime: todo.due || null, text: formatDue(todo.due) }),
+        label && h("span", { class: `badge badge--${label.kind}`, text: label.text }),
       ),
     ),
 
@@ -27,6 +30,7 @@ export function createTaskItem(todo) {
   );
 
   item.classList.toggle("task--done", todo.done);
+  item.classList.toggle("task--overdue", label?.kind === "overdue");
 
   return item;
 }
