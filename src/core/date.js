@@ -6,7 +6,9 @@ const toDate = (iso) => {
 };
 
 export function todayISO() {
-  return new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  return now.toISOString().slice(0, 10);
 }
 
 export function formatDue(iso) {
