@@ -296,6 +296,60 @@ p {
 }
 
 /* ==========================================================================
+   Переключатель статуса
+   ========================================================================== */
+
+.segmented {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.segmented__track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.segmented__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented__label {
+  display: block;
+  padding: 7px 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-soft);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.segmented__label:hover {
+  color: var(--text);
+}
+
+.segmented__input:checked + .segmented__label {
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+}
+
+.segmented__input:focus-visible + .segmented__label {
+  box-shadow: var(--ring);
+}
+
+/* ==========================================================================
    Список задач
    ========================================================================== */
 
