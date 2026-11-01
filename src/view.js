@@ -6,8 +6,11 @@ const STATUS = {
   done: (todo) => todo.done,
 };
 
+// Задачи без срока всегда оказываются в конце списка.
 const byDue = (direction) => (a, b) => {
   if (a.due === b.due) return 0;
+  if (!a.due) return 1;
+  if (!b.due) return -1;
   return a.due < b.due ? -direction : direction;
 };
 
