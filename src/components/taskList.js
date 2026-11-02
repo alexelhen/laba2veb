@@ -3,7 +3,7 @@ import { createTaskItem } from "./taskItem.js";
 
 const idOf = (node) => node.closest(".task").dataset.id;
 
-export function createTaskList({ onToggle, onRemove }) {
+export function createTaskList({ onToggle, onRemove, onEdit }) {
   const counter = h("span", { class: "board__count" });
   const list = h("ul", { class: "tasks" });
   const empty = h("p", { class: "board__empty", hidden: true });
@@ -17,7 +17,7 @@ export function createTaskList({ onToggle, onRemove }) {
     const button = event.target.closest("[data-action]");
     if (!button) return;
 
-    const actions = { remove: onRemove };
+    const actions = { edit: onEdit, remove: onRemove };
     actions[button.dataset.action]?.(idOf(button));
   });
 

@@ -6,6 +6,7 @@ import { createHeader } from "./components/header.js";
 import { createTaskForm } from "./components/taskForm.js";
 import { createToolbar } from "./components/toolbar.js";
 import { createTaskList } from "./components/taskList.js";
+import { createEditDialog } from "./components/editDialog.js";
 
 setupDocument();
 
@@ -13,10 +14,12 @@ setupDocument();
 const view = { query: "", status: "all", sort: "manual" };
 
 const header = createHeader();
+const editor = createEditDialog({ onSave: store.updateTodo });
 
 const taskList = createTaskList({
   onToggle: store.toggleTodo,
   onRemove: store.removeTodo,
+  onEdit: (id) => editor.open(store.findTodo(id)),
 });
 
 const toolbar = createToolbar({
@@ -41,6 +44,7 @@ document.body.append(
       h("p", { text: "Лабораторная работа № 2 · задачи сохраняются в localStorage" }),
     ),
   ),
+  editor.element,
 );
 
 function render() {

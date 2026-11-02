@@ -24,6 +24,8 @@ const createId = () => Date.now().toString(36) + Math.random().toString(36).slic
 
 export const getTodos = () => todos;
 
+export const findTodo = (id) => todos.find((todo) => todo.id === id);
+
 export function subscribe(listener) {
   listeners.add(listener);
   return () => listeners.delete(listener);
@@ -32,6 +34,10 @@ export function subscribe(listener) {
 export function addTodo({ title, due }) {
   const todo = { id: createId(), title, due, done: false, createdAt: Date.now() };
   commit([todo, ...todos]);
+}
+
+export function updateTodo(id, changes) {
+  commit(todos.map((todo) => (todo.id === id ? { ...todo, ...changes } : todo)));
 }
 
 export function toggleTodo(id) {

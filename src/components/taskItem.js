@@ -25,6 +25,7 @@ export function createTaskItem(todo) {
     ),
 
     h("div", { class: "task__actions" },
+      iconButton("edit", "✎", `Редактировать «${todo.title}»`),
       iconButton("remove", "✕", `Удалить «${todo.title}»`, "danger"),
     ),
   );
