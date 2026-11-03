@@ -20,6 +20,7 @@ const taskList = createTaskList({
   onToggle: store.toggleTodo,
   onRemove: store.removeTodo,
   onEdit: (id) => editor.open(store.findTodo(id)),
+  onReorder: store.reorderTodos,
 });
 
 const toolbar = createToolbar({
@@ -52,6 +53,7 @@ function render() {
 
   header.update(todos);
   taskList.update(selectVisible(todos, view), {
+    sortable: view.sort === "manual",
     emptyText: todos.length
       ? "Ничего не найдено — измените поиск или фильтр"
       : "Список пуст. Добавьте первую задачу!",

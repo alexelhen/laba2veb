@@ -47,3 +47,18 @@ export function toggleTodo(id) {
 export function removeTodo(id) {
   commit(todos.filter((todo) => todo.id !== id));
 }
+
+// Получает id видимых задач в новом порядке и раскладывает их
+// по тем же позициям в общем списке — скрытые фильтром задачи остаются на месте.
+export function reorderTodos(orderedIds) {
+  const moved = new Set(orderedIds);
+  const slots = [];
+  todos.forEach((todo, index) => moved.has(todo.id) && slots.push(index));
+
+  const next = [...todos];
+  orderedIds.forEach((id, i) => {
+    next[slots[i]] = findTodo(id);
+  });
+
+  commit(next);
+}

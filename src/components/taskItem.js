@@ -2,10 +2,12 @@ import { h } from "../core/h.js";
 import { formatDue, dueLabel } from "../core/date.js";
 import { iconButton } from "./ui.js";
 
-export function createTaskItem(todo) {
+export function createTaskItem(todo, { sortable }) {
   const label = dueLabel(todo);
 
-  const item = h("li", { class: "task", data: { id: todo.id } },
+  const item = h("li", { class: "task", draggable: sortable, data: { id: todo.id } },
+    sortable && h("span", { class: "task__grip", "aria-hidden": "true", title: "Перетащите, чтобы изменить порядок", text: "⋮⋮" }),
+
     h("label", { class: "task__check" },
       h("input", {
         class: "task__toggle",
