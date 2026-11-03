@@ -6,12 +6,32 @@ const listeners = new Set();
 
 let todos = readStorage();
 
+function isTodo(value) {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    typeof value.id === "string" &&
+    typeof value.title === "string" &&
+    typeof value.due === "string" &&
+    typeof value.done === "boolean"
+  );
+}
+
 function readStorage() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+    return Array.isArray(data) ? data.filter(isTodo) : [];
+  } catch {
+    return [];
+  }
 }
 
 function writeStorage() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  } catch (error) {
+    console.error("Не удалось сохранить задачи", error);
+  }
 }
 
 function commit(next) {
