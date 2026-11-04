@@ -30,6 +30,30 @@
   color-scheme: light;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161513;
+    --surface: #211f1c;
+    --surface-alt: #2b2925;
+    --text: #f1ede4;
+    --text-soft: #a59f93;
+    --line: #36332e;
+
+    --accent: #ff7a35;
+    --accent-strong: #ff9257;
+    --accent-soft: #3a2518;
+    --success: #5cc272;
+    --success-soft: #1d3122;
+    --danger: #f06595;
+    --danger-soft: #3a1d27;
+    --warning: #f2c94c;
+    --warning-soft: #3a3218;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 10px 30px rgb(0 0 0 / 25%);
+    color-scheme: dark;
+  }
+}
+
 /* ==========================================================================
    База
    ========================================================================== */
@@ -588,4 +612,58 @@ p {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 6px;
+}
+
+/* ==========================================================================
+   Адаптивность
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .layout__aside {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .app {
+    gap: 20px;
+    padding: 24px 16px 16px;
+  }
+
+  .layout,
+  .layout__aside {
+    gap: 16px;
+  }
+
+  .layout__aside {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .hero__stats {
+    width: 100%;
+  }
+
+  .task {
+    gap: 10px;
+    padding: 10px 8px 10px 12px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .dialog__actions .btn {
+    flex: 1;
+  }
 }
